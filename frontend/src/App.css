@@ -1,0 +1,1146 @@
+/* frontend/src/App.css */
+
+/* Default text color: black everywhere except where explicitly
+   overridden to white (buttons, badges, dark headers, etc.) */
+body,
+.app-container,
+p, span, div, label, h1, h2, h3, h4, h5, h6, li, td, th {
+  color: #000;
+}
+
+/* ============================================================
+   App Shell
+   ============================================================ */
+.app-container {
+  max-width: 2000px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+  border-radius:40px;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 3.95rem;
+}
+
+.app-title {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: white;
+  margin-bottom: 0.35rem;
+}
+
+.app-subtitle {
+  font-size: 0.95rem;
+  color: var(--color-text-light);
+}
+
+/* ============================================================
+   Top Bar (user info + logout)
+   ============================================================ */
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: transparent;
+  padding: 0.9rem 1.25rem;
+  margin-bottom: 0;
+  font-size: 1.55rem;
+  text-color:white;
+}
+
+.top-bar strong {
+  color: #fff;
+}
+
+.top-bar-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+/* Bell always on top, Logout button always below —
+   regardless of the order the elements appear in JSX. */
+.top-bar-actions .notification-bell-wrapper {
+  order: 1;
+}
+
+.top-bar-actions .btn-danger {
+  order: 2;
+}
+
+/* ============================================================
+   Admin Navigation Menu (Employees / Task)
+   ============================================================ */
+
+.tab-menu {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 0.35rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  text-align: center;
+  padding: 0.45rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--color-text-light);
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.tab-btn:hover {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.tab-btn-active {
+  background: var(--color-primary);
+  color: #fff !important;
+}
+
+.tab-btn-active:hover {
+  background: var(--color-primary-dark);
+  color: #fff !important;
+}
+
+/* ============================================================
+   Error Banner
+   ============================================================ */
+
+.error-banner {
+  background-color: #fef2f2;
+  color: var(--color-danger) !important;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.98rem;
+  font-weight: 500;
+}
+
+/* ============================================================
+   Buttons
+   ============================================================ */
+
+.btn {
+  border: none;
+  border-radius: 8px;
+  padding: 0.65rem 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease,
+  background-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #fff !important;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-dark);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-edit {
+  background: #4f46e5;
+  color: #fff !important;
+}
+
+.btn-edit:hover {
+  background: #4338ca;
+}
+
+.btn-danger {
+  background: #dc2626;
+  color: #fff !important;
+}
+
+.btn-danger:hover {
+  background: #b91c1c;
+}
+
+.btn-success {
+  background: #10b981;
+  color: #fff !important;
+}
+
+.btn-success:hover {
+  background: #059669;
+}
+
+.btn-secondary {
+  background: #6b7280;
+  color: #fff !important;
+}
+
+.btn-secondary:hover {
+  background: #4b5563;
+}
+
+/* Solid danger button used for Logout, so it reads as a clear,
+   deliberate action in the top bar (not a delete-row action). */
+.top-bar .btn-danger {
+  background: var(--color-danger, #dc2626);
+  color: #fff !important;
+  padding: 0.55rem 1.1rem;
+}
+
+.top-bar .btn-danger:hover {
+  background: #b91c1c;
+  box-shadow: var(--shadow-md);
+}
+
+/* ============================================================
+   Task Creation Form
+   ============================================================ */
+
+.todo-form-container {
+  margin-bottom: 0;
+}
+
+.todo-form {
+  background-color: #fff;
+  border-radius: var(--radius, 12px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.todo-form-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+}
+
+.todo-form-header h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937 !important;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151 !important;
+}
+
+.todo-input,
+.todo-textarea {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 15px;
+  color: #000 !important;
+  background: #fff;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  resize: vertical;
+  outline: none;
+}
+
+.todo-input:focus,
+.todo-textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.create-btn {
+  align-self: flex-start;
+  padding: 0.7rem 1.6rem;
+}
+
+/* ============================================================
+   Dashboard Toolbar (+ Add Employee)
+   ============================================================ */
+
+.dashboard-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+/* ============================================================
+   Employee Management
+   ============================================================ */
+
+.todo-form-footer {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.employee-form {
+  width: 100%;
+  max-width: 2000px;
+  margin: 20px auto;
+  padding: 25px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+}
+
+.employee-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.field-error {
+  font-size: 13px;
+  color: #dc2626 !important;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.employee-view-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.employee-view-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem 0.9rem;
+  background: #f7f7f7;
+  border-radius: 8px;
+  border: 1px solid #27272b50 ;
+}
+
+.employee-view-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #6b7280 !important;
+}
+
+.employee-view-value {
+  font-size: 0.95rem;
+  color: #111827 !important;
+}
+
+/* ============================================================
+   Task Table
+   ============================================================ */
+
+.todo-table-container {
+  margin-top: 0;
+  background: #fff;
+  border-radius: var(--radius, 12px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  overflow-x: auto;
+}
+
+.todo-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  min-width: 760px;
+}
+
+.todo-table thead {
+  background: var(--color-primary-dark, #4338ca);
+}
+
+.todo-table th {
+  color: #fff !important;
+  font-weight: 600;
+  text-align: left;
+  padding: 0.9rem 1.1rem;
+  white-space: nowrap;
+}
+
+.todo-table tbody tr {
+  border-bottom: 1px solid var(--color-border, #e5e7eb);
+  transition: background-color 0.12s ease;
+}
+
+.todo-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.todo-table tbody tr:hover {
+  background-color: #f8f9ff;
+}
+
+.todo-table td {
+  padding: 0.85rem 1.1rem;
+  vertical-align: middle;
+  color: #111827 !important;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ============================================================
+   Dropdowns (Status / Assign To)
+   ============================================================ */
+
+.status-select {
+  min-width: 140px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff;
+  color: #000 !important;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.status-select:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.assign-multiselect {
+  min-width: 160px;
+  min-height: 74px;
+  padding: 0.35rem;
+}
+
+.assign-multiselect option {
+  padding: 0.25rem 0.4rem;
+}
+
+.assign-checkbox-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 100px;
+  overflow-y: auto;
+  padding: 4px 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  min-width: 140px;
+}
+
+.assign-checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.assign-checkbox-item input[type="checkbox"] {
+  cursor: pointer;
+}
+
+/* ============================================================
+   Empty State
+   ============================================================ */
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: #fff;
+  border: 1px dashed var(--color-border, #d1d5db);
+  border-radius: var(--radius, 12px);
+  color: #6b7280 !important;
+}
+
+.empty-state h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #111827 !important;
+}
+
+/* ============================================================
+   Login Page
+   ============================================================ */
+
+.login-container {
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.login-form {
+  width: 100%;
+  max-width: 500px;
+  height:600px;
+  background: #faf8f8;
+  padding: 2.25rem;
+  border-radius: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid var(--color-border, #e5e7eb);
+  box-sizing: border-box;
+}
+
+.login-title {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: #191b1f !important;
+  font-size: 1.9rem;
+  font-weight: 800;
+}
+
+.login-form .todo-input {
+  padding: 0.8rem 1rem;
+  font-size: 0.95rem;
+}
+
+.login-btn {
+  width: 100%;
+  margin-top: 0.25rem;
+  padding: 0.85rem 1rem;
+}
+
+/* Classes used by Login.jsx (kept in sync with .login-container /
+   .login-form / .login-title above so both login components look
+   identical regardless of which one is actually mounted). */
+
+.login-page {
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background: #faf8f8;
+  padding: 2.25rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--color-border, #e5e7eb);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.login-subtitle {
+  text-align: center;
+  color: #6b7280 !important;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.login-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.9rem;
+}
+
+.login-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151 !important;
+}
+
+.login-error {
+  margin-bottom: 1rem;
+}
+
+/* ============================================================
+   Employee Comments
+   ============================================================ */
+
+.employee-comments-section {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 2px solid #e5e7eb;
+}
+
+.comments-header h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: #111827 !important;
+}
+
+.comment-role-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.comment-role-row label {
+  font-weight: 600;
+  color: #374151 !important;
+}
+
+.comment-role-select {
+  width: 180px;
+  max-width: 100%;
+}
+
+.comment-textarea {
+  width: 100%;
+  min-height: 90px;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.comment-add-btn {
+  margin-top: 10px;
+}
+
+.comments-list {
+  margin-top: 20px;
+}
+
+.no-comments {
+  color: #9ca3af !important;
+  font-size: 14px;
+}
+
+.comment-card {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 12px;
+}
+
+.comment-top {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.comment-role-badge {
+  background: #e0e7ff;
+  color: #3730a3 !important;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.comment-text {
+  margin: 8px 0;
+  color: #111827 !important;
+}
+
+.comment-card small {
+  color: #6b7280 !important;
+}
+
+.comment-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.comment-edit-btn {
+  border: none;
+  background: #f0ad4e;
+  color: #fff !important;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.comment-delete-btn {
+  border: none;
+  background: #dc3545;
+  color: #fff !important;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.comment-edit-btn:hover,
+.comment-delete-btn:hover {
+  opacity: 0.85;
+}
+
+/* ============================================================
+   Password Field
+   ============================================================ */
+
+.password-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-input-wrapper .todo-input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666 !important;
+  font-size: 16px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.password-toggle-btn:hover {
+  color: #333 !important;
+}
+
+/* ============================================================
+   Task Top Actions
+   ============================================================ */
+
+.task-top-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  margin-top: 0;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 10;
+}
+
+.task-top-actions .btn-primary,
+.task-top-actions .btn-danger,
+.task-top-actions .btn-secondary {
+  height: 34px;
+  min-width: 70px;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 5px;
+  margin: 0;
+}
+
+/* ============================================================
+   Notifications
+   ============================================================ */
+
+.notification-bell-wrapper {
+  position: relative;
+}
+
+.notification-bell-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  color: #111827 !important;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.notification-bell-btn:hover {
+  background: #e5e7eb;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: #ef4444;
+  color: #fff !important;
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+}
+
+.notification-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 320px;
+  max-width: 90vw;
+  max-height: 420px;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+}
+
+.notification-dropdown-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.notification-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.notification-header-link-btn {
+  background: none;
+  border: none;
+  color: #4f46e5 !important;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  white-space: nowrap;
+}
+
+.notification-header-link-btn:disabled {
+  color: #9ca3af !important;
+  cursor: not-allowed;
+}
+
+.notification-mark-all-btn {
+  background: none;
+  border: none;
+  color: #4f46e5 !important;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+
+.notification-mark-all-btn:disabled {
+  color: #9ca3af !important;
+  cursor: not-allowed;
+}
+
+/* ============================================================
+   Notifications Page (full "View All" list)
+   ============================================================ */
+
+.notifications-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 1rem;
+}
+
+.notifications-page-list {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.notifications-page-list .notification-item {
+  padding: 0.9rem 1.1rem;
+}
+
+.notification-list {
+  overflow-y: auto;
+  flex: 1;
+}
+
+.no-notifications {
+  padding: 1.25rem 1rem;
+  text-align: center;
+  color: #6b7280 !important;
+  font-size: 0.9rem;
+}
+
+.notification-item {
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid #f3f4f6;
+  cursor: pointer;
+}
+
+.notification-item:hover {
+  background: #f9fafb;
+}
+
+.notification-item-unread {
+  background: #eef2ff;
+}
+
+.notification-message {
+  font-size: 0.88rem;
+  color: #111827 !important;
+  margin-bottom: 4px;
+}
+
+.notification-time {
+  color: #6b7280 !important;
+  font-size: 0.75rem;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .app-container {
+    padding: 1.25rem 0.85rem 2.5rem;
+  }
+
+  .app-title {
+    font-size: 1.6rem;
+  }
+
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .top-bar-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .tab-menu {
+    flex-direction: column;
+  }
+
+  .tab-btn {
+    text-align: left;
+  }
+
+  .todo-form,
+  .employee-form {
+    padding: 1.25rem;
+  }
+
+  .todo-form-header {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .employee-form-grid,
+  .employee-view-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-toolbar {
+    justify-content: stretch;
+  }
+
+  .dashboard-toolbar .btn {
+    width: 100%;
+  }
+
+  .login-form {
+    padding: 1.75rem;
+    max-width: 100%;
+  }
+
+  .todo-table {
+    font-size: 0.85rem;
+  }
+
+  .todo-table th,
+  .todo-table td {
+    padding: 0.65rem 0.75rem;
+  }
+
+  .todo-form-footer {
+    flex-direction: column;
+  }
+
+  .todo-form-footer .btn {
+    width: 100%;
+  }
+
+  .comment-role-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .comment-role-select {
+    width: 100%;
+  }
+
+  .notification-dropdown {
+    width: 90vw;
+    right: -60px;
+  }
+
+  /* ----------------------------------------------------------
+     Tables -> stacked cards on small screens.
+     Every row becomes one unified card instead of a wide table
+     that gets cut into scattered, horizontally-scrolling pieces.
+     Works together with data-label attributes added on each <td>
+     in TodoItem.jsx and EmployeeTable.jsx.
+     ---------------------------------------------------------- */
+  .todo-table-container {
+    overflow-x: visible;
+  }
+
+  .todo-table {
+    min-width: unset;
+    border: none;
+  }
+
+  .todo-table thead {
+    display: none;
+  }
+
+  .todo-table,
+  .todo-table tbody,
+  .todo-table tr {
+    display: block;
+    width: 100%;
+  }
+
+  .todo-table tr {
+    margin-bottom: 1rem;
+    border: 1px solid var(--color-border, #e5e7eb);
+    border-radius: 12px;
+    padding: 0.5rem 0.75rem;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  .todo-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 0.6rem 0.25rem;
+    border-bottom: 1px solid #f3f4f6;
+    text-align: right;
+  }
+
+  .todo-table td:last-child {
+    border-bottom: none;
+  }
+
+  .todo-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #374151 !important;
+    text-align: left;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+
+  .todo-table td .actions-cell {
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  .todo-table td .assign-checkbox-list {
+    width: 100%;
+    max-width: 220px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-title {
+    font-size: 1.5rem;
+  }
+
+  .app-title {
+    font-size: 1.35rem;
+  }
+
+  .task-top-actions {
+    justify-content: stretch;
+  }
+
+  .task-top-actions .btn {
+    flex: 1;
+  }
+}
+.filter-bar {
+  display: flex;
+  gap: 16px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  padding: 12px 16px;
+  background: #f8f9fc;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.filter-group label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #444;
+}
+.filter-select, .filter-input {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  min-width: 160px;
+}
+.filter-search {
+  flex-grow: 1;
+}
+.filter-search .filter-input {
+  width: 100%;
+  min-width: 220px;
+}
+.filter-clear-btn {
+  height: 34px;
+}
