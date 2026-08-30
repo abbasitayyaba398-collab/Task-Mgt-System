@@ -81,7 +81,6 @@
 // }
 
 // export default TodoList;
-
 // frontend/src/components/TodoList.jsx
 
 import { useEffect, useState, useMemo } from "react";
@@ -103,16 +102,6 @@ const STATUS_FILTER_OPTIONS = [
   "Approved",
 ];
 
-const DEADLINE_QUICK_OPTIONS = [
-  { value: "All", label: "All" },
-  { value: "overdue", label: "Overdue" },
-  { value: "today", label: "Today" },
-  { value: "tomorrow", label: "Tomorrow" },
-  { value: "next3", label: "Next 3 Days" },
-  { value: "next5", label: "Next 5 Days" },
-  { value: "next7", label: "Next 7 Days" },
-];
-
 // ===========================
 // Helpers — date normalization
 // (compare by calendar day, ignore time)
@@ -123,49 +112,8 @@ function startOfDay(date) {
   return d;
 }
 
-function addDays(date, days) {
-  const d = new Date(date);
-  d.setDate(d.getDate() + days);
-  return d;
-}
-
 function isSameDay(dateA, dateB) {
   return startOfDay(dateA).getTime() === startOfDay(dateB).getTime();
-}
-
-// Returns true if `deadline` falls within the selected quick-range
-function matchesDeadlineQuickFilter(deadline, quickFilter) {
-  if (quickFilter === "All") return true;
-  if (!deadline) return false;
-
-  const deadlineDay = startOfDay(deadline);
-  const today = startOfDay(new Date());
-
-  switch (quickFilter) {
-    case "overdue":
-      return deadlineDay.getTime() < today.getTime();
-    case "today":
-      return isSameDay(deadlineDay, today);
-    case "tomorrow":
-      return isSameDay(deadlineDay, addDays(today, 1));
-    case "next3":
-      return (
-        deadlineDay.getTime() >= today.getTime() &&
-        deadlineDay.getTime() <= addDays(today, 3).getTime()
-      );
-    case "next5":
-      return (
-        deadlineDay.getTime() >= today.getTime() &&
-        deadlineDay.getTime() <= addDays(today, 5).getTime()
-      );
-    case "next7":
-      return (
-        deadlineDay.getTime() >= today.getTime() &&
-        deadlineDay.getTime() <= addDays(today, 7).getTime()
-      );
-    default:
-      return true;
-  }
 }
 
 function TodoList({
@@ -187,7 +135,6 @@ function TodoList({
   const [employeeFilter, setEmployeeFilter] = useState("All");
   const [createdDateFilter, setCreatedDateFilter] = useState(""); // exact created date (yyyy-mm-dd)
   const [deadlineDateFilter, setDeadlineDateFilter] = useState(""); // exact deadline date (yyyy-mm-dd)
-  const [deadlineQuickFilter, setDeadlineQuickFilter] = useState("All");
 
   useEffect(() => {
     const loadEmployees = async () => {
@@ -214,13 +161,11 @@ function TodoList({
         name === "" || (todo.title || "").toLowerCase().includes(name);
 
       // --- Status filter ---
-      // Default view ("All") hides Approved tasks so the list
-      // stays focused on active work. Selecting "Approved"
-      // explicitly is the only way to see them.
+      // "All" shows every task regardless of status (including
+      // Approved). Selecting a specific status narrows the list
+      // down to just that status.
       const matchesStatus =
-        statusFilter === "All"
-          ? todo.status !== "Approved"
-          : todo.status === statusFilter;
+        statusFilter === "All" || todo.status === statusFilter;
 
       // --- Assign To filter ---
       const assignedIds = (todo.assignedTo || []).map(
@@ -251,19 +196,12 @@ function TodoList({
           );
       }
 
-      // --- Deadline quick filter (Today/Tomorrow/3/5/7 days/Overdue) ---
-      const matchesDeadlineQuick = matchesDeadlineQuickFilter(
-        todo.deadline,
-        deadlineQuickFilter
-      );
-
       return (
         matchesName &&
         matchesStatus &&
         matchesEmployee &&
         matchesCreatedDate &&
-        matchesDeadlineDate &&
-        matchesDeadlineQuick
+        matchesDeadlineDate
       );
     });
   }, [
@@ -273,7 +211,6 @@ function TodoList({
     employeeFilter,
     createdDateFilter,
     deadlineDateFilter,
-    deadlineQuickFilter,
   ]);
 
   const handleClearFilters = () => {
@@ -282,16 +219,7 @@ function TodoList({
     setEmployeeFilter("All");
     setCreatedDateFilter("");
     setDeadlineDateFilter("");
-    setDeadlineQuickFilter("All");
   };
-
-  const hasActiveFilters =
-    nameFilter !== "" ||
-    statusFilter !== "All" ||
-    employeeFilter !== "All" ||
-    createdDateFilter !== "" ||
-    deadlineDateFilter !== "" ||
-    deadlineQuickFilter !== "All";
 
   return (
     <div className="todo-table-container">
@@ -373,32 +301,14 @@ function TodoList({
           />
         </div>
 
-        {/* Deadline quick filter */}
-        <div className="filter-group">
-          <label htmlFor="deadlineQuickFilter">Deadline</label>
-          <select
-            id="deadlineQuickFilter"
-            className="filter-select"
-            value={deadlineQuickFilter}
-            onChange={(e) => setDeadlineQuickFilter(e.target.value)}
-          >
-            {DEADLINE_QUICK_OPTIONS.map((opt) => (
-              <option key={opt.value} value={opt.value}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {hasActiveFilters && (
-          <button
-            type="button"
-            className="btn btn-secondary filter-clear-btn"
-            onClick={handleClearFilters}
-          >
-            Clear Filters
-          </button>
-        )}
+        {/* Clear Filters — always visible */}
+        <button
+          type="button"
+          className="btn btn-secondary filter-clear-btn"
+          onClick={handleClearFilters}
+        >
+          Clear Filters
+        </button>
 
       </div>
 
@@ -449,4 +359,3 @@ function TodoList({
 }
 
 export default TodoList;
-

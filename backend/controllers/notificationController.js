@@ -46,10 +46,24 @@ const createNotification = async ({ recipientId, message, type, todoId }) => {
 // ======================================
 // Status change / comment jaise events par task se juray sab
 // "stakeholders" ko notify karta hai: assigned employees + tamam
-// admins — sirf jisne khud action kiya usay chor kar (khud ko
-// notification bhejne ki zarurat nahi).
+// admins.
+//
+// `excludeActor` (default true): jisne khud action kiya usay
+// notification list se hata deta hai — jaise comment karne wale
+// ko apne hi comment ki notification nahi chahiye.
+//
+// Status change ke liye ye false pass kiya jata hai, kyunki
+// actor (jaise admin khud) ko bhi apni history save honi chahiye,
+// sirf ek temporary local message nahi jo refresh par gayab ho
+// jaye.
 // ======================================
-const notifyStakeholders = async ({ todo, actorId, message, type }) => {
+const notifyStakeholders = async ({
+  todo,
+  actorId,
+  message,
+  type,
+  excludeActor = true,
+}) => {
   try {
     const assigneeIds = (todo.assignedTo || []).map((emp) =>
       String(emp?._id || emp)
@@ -60,7 +74,7 @@ const notifyStakeholders = async ({ todo, actorId, message, type }) => {
 
     const recipientIds = new Set([...assigneeIds, ...adminIds]);
 
-    if (actorId) recipientIds.delete(String(actorId));
+    if (actorId && excludeActor) recipientIds.delete(String(actorId));
 
     await Promise.all(
       [...recipientIds].map((recipientId) =>
