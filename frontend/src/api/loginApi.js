@@ -30,7 +30,11 @@
 
 // src/api/loginApi.js
 
-const BASE_URL = "http://localhost:5000/api/login";
+
+const API_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+const BASE_URL = `${API_URL}/api/login`;
 
 export const loginUser = async (email, password) => {
   const response = await fetch(BASE_URL, {

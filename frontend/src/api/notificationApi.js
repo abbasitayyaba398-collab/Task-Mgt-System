@@ -4,12 +4,14 @@
 // yahan se fetch hoti hai aur read/unread status bhi yahin se
 // save hota hai (sirf local state nahi).
 
-const BASE_URL = "http://localhost:5000/api/notifications";
+
+const API_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+const BASE_URL = `${API_URL}/api/notifications`;
 
 // ======================================
 // GET NOTIFICATIONS
-// Login ke waqt (ya jab bhi zarurat ho) is user ki poori
-// notification history laata hai.
 // ======================================
 export const fetchNotifications = async (userId) => {
   const response = await fetch(`${BASE_URL}?userId=${userId}`);
